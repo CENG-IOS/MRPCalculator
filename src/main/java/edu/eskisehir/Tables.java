@@ -1,6 +1,6 @@
 //0 0 0 60 100 0 50 0 30 0
 
-package edu.esksiehir;
+package edu.eskisehir;
 
 import java.awt.Desktop;
 import java.awt.HeadlessException;
