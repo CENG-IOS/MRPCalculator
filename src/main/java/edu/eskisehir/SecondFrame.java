@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -69,7 +70,7 @@ public class SecondFrame extends javax.swing.JFrame {
         input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable,title)
             {
                 boolean[] canEdit = new boolean [] {
-                    false, false, false, false
+                    false, false, false, false,false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -101,7 +102,9 @@ public class SecondFrame extends javax.swing.JFrame {
         lblConsole.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblConsole.setForeground(new java.awt.Color(204, 0, 0));
 
+        btnCalculateMRP.setBackground(new java.awt.Color(54, 88, 128));
         btnCalculateMRP.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCalculateMRP.setForeground(new java.awt.Color(230, 230, 230));
         btnCalculateMRP.setText("Calculate MRP tables");
         btnCalculateMRP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,13 +198,13 @@ public class SecondFrame extends javax.swing.JFrame {
 
         if (check(txtOnHand.getText().trim()) || check(txtArrivalOnWeek.getText().trim()) || check(txtScheduledReceipt.getText().trim())) {
             lblConsole.setForeground(new java.awt.Color(204, 0, 0));
-            lblConsole.setText("Error!");
+            lblConsole.setText("Illegal input!");
         } else {
             lblConsole.setText("");
             inputTable[selector.getSelectedIndex()][1] = txtOnHand.getText().trim();
             inputTable[selector.getSelectedIndex()][2] = txtScheduledReceipt.getText().trim();
             inputTable[selector.getSelectedIndex()][3] = txtArrivalOnWeek.getText().trim();
-            lblConsole.setForeground(new java.awt.Color(0, 204, 0));
+            lblConsole.setForeground(new java.awt.Color(29, 150, 65));
             lblConsole.setText("Update is successful!");
 
             Item item = Item.search(selector.getSelectedItem().toString());
@@ -214,14 +217,31 @@ public class SecondFrame extends javax.swing.JFrame {
             txtScheduledReceipt.setText("");
         }
 
-        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title));
+        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        }
+        );
 
         for (int i = 0; i < 6; i++) {
-            input_table.getColumnModel().getColumn(i).setPreferredWidth(92);
             if (input_table.getColumnModel().getColumnCount() > 0) {
                 input_table.getColumnModel().getColumn(i).setResizable(false);
             }
         }
+        //selector.setSelectedI          
+        input_table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        input_table.getColumnModel().getColumn(1).setPreferredWidth(110);
+        input_table.getColumnModel().getColumn(2).setPreferredWidth(120);
+        input_table.getColumnModel().getColumn(3).setPreferredWidth(100);
+        input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
+        input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
+        input_table.setCellSelectionEnabled(true);
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -234,19 +254,17 @@ public class SecondFrame extends javax.swing.JFrame {
             }
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Tables tablo = new Tables();
-                tablo.setVisible(true);
-                tablo.setResizable(false);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            Tables tablo = new Tables();
+            tablo.setVisible(true);
+            tablo.setResizable(false);
         });
 
         try {
             Document document = new Document();
             PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream("MRP.pdf"));
             document.open();
-            document.add(new Paragraph(DemandInput.demandInt.size() + "-WEEK ORDER PLAN.\n"));
+            document.add(new Paragraph(DemandInput.demandInt.size() + " - WEEK ORDER PLAN\n"));
             String str = "";
             for (int i = 0; i < 10; i++) {
                 int counter = 0;
@@ -271,11 +289,16 @@ public class SecondFrame extends javax.swing.JFrame {
 
             document.close();
             pdfWriter.close();
-        } catch (DocumentException | FileNotFoundException ex) {/////////////////////////////////////////////////////////////
+        } catch (DocumentException | FileNotFoundException ex) {
             System.out.println(ex.getMessage());
 
         }
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 10; j++) {
+                Tables.tablo1[i][j + 1] = items.get(0).bill[i][j];
 
+            }
+        }
 
     }//GEN-LAST:event_btnCalculateMRPActionPerformed
 
@@ -297,7 +320,7 @@ public class SecondFrame extends javax.swing.JFrame {
                 i++;
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "No default constant file found.\nBy default this file should be in 'src/main/resources' ", "Warning", JOptionPane.WARNING_MESSAGE);
             System.exit(0);
         }
@@ -311,7 +334,17 @@ public class SecondFrame extends javax.swing.JFrame {
             }
         }
 
-        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title));
+        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        }
+        );
 
         for (int i = 0; i < 6; i++) {
             if (input_table.getColumnModel().getColumnCount() > 0) {
@@ -324,6 +357,7 @@ public class SecondFrame extends javax.swing.JFrame {
         input_table.getColumnModel().getColumn(3).setPreferredWidth(100);
         input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
         input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
+        input_table.setCellSelectionEnabled(true);
     }//GEN-LAST:event_btnDefaultValuesActionPerformed
 
     public boolean check(String s) {

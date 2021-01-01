@@ -1,13 +1,10 @@
 //0 0 0 60 100 0 50 0 30 0
-
 package edu.eskisehir;
 
 import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Objects;
 import javax.swing.JOptionPane;
@@ -20,14 +17,14 @@ public class Tables extends javax.swing.JFrame {
 
     static String[] periods = new String[11];
 
-    Object[][] tablo1 = {
-        {"Gross Requirements", null, null, null, null, null, null, null, null, null, null},
-        {"Scheduled receipts", null, null, null, null, null, null, null, null, null, null},
-        {"On hand from prior period", null, null, null, null, null, null, null, null, null, null},
-        {"Net requirements", null, null, null, null, null, null, null, null, null, null},
-        {"Time-phased Net Req.", null, null, null, null, null, null, null, null, null, null},
-        {"Planned order releases", null, null, null, null, null, null, null, null, null, null},
-        {"Planned order delivery", null, null, null, null, null, null, null, null, null, null}
+    static Object[][] tablo1 = {
+        {"Gross Requirements", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {"Scheduled receipts", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {"On hand from prior period", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {"Net requirements", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {"Time-phased Net Req.", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {"Planned order releases", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {"Planned order delivery", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
     public Tables() {
@@ -53,7 +50,9 @@ public class Tables extends javax.swing.JFrame {
         selectTables.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         selectTables.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1605", "13122", "048", "118", "314", "062", "14127", "457", "11495", "129", "1118", "2142", "019" }));
 
+        btnShowTable.setBackground(new java.awt.Color(54, 88, 128));
         btnShowTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnShowTable.setForeground(new java.awt.Color(230, 230, 230));
         btnShowTable.setText("Show");
         btnShowTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,10 +61,11 @@ public class Tables extends javax.swing.JFrame {
         });
 
         lblTableName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTableName.setText(" ");
+        lblTableName.setForeground(new java.awt.Color(0, 0, 128));
+        lblTableName.setText("Table Name :  Shovel (1605)");
 
         btnExit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnExit.setText("EXIT");
+        btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -74,7 +74,7 @@ public class Tables extends javax.swing.JFrame {
 
         jTablo.setModel(new javax.swing.table.DefaultTableModel(tablo1,periods){
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false,false,false,false,false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -97,37 +97,7 @@ public class Tables extends javax.swing.JFrame {
         for(int i = 0 ;i<7;i++){
             jTablo.setRowHeight(i, 25);
         }
-
-        jTablo.getColumnModel().getColumn(0).setPreferredWidth(200);
-        if (jTablo.getColumnModel().getColumnCount() > 0) {
-            jTablo.getColumnModel().getColumn(0).setResizable(false);
-            jTablo.getColumnModel().getColumn(1).setResizable(false);
-            jTablo.getColumnModel().getColumn(3).setResizable(false);
-        }
-        jScrollPane1.setViewportView(jTablo);
-        /*
-
-        jTablo.setModel(new javax.swing.table.DefaultTableModel(tablo1,periods){
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        if (jTablo.getColumnModel().getColumnCount() > 0) {
-            jTablo.getColumnModel().getColumn(0).setResizable(false);
-            jTablo.getColumnModel().getColumn(2).setResizable(false);
-            jTablo.getColumnModel().getColumn(1).setResizable(false);
-            jTablo.getColumnModel().getColumn(3).setResizable(false);
-            jTablo.getColumnModel().getColumn(4).setResizable(false);
-            jTablo.getColumnModel().getColumn(5).setResizable(false);
-        }
-        for(int i = 0 ;i<7;i++){
-            jTablo.setRowHeight(i, 25);
-        }
-
+        jTablo.setCellSelectionEnabled(true);
         jTablo.getColumnModel().getColumn(0).setPreferredWidth(200);
         if (jTablo.getColumnModel().getColumnCount() > 0) {
             jTablo.getColumnModel().getColumn(0).setResizable(false);
@@ -136,9 +106,9 @@ public class Tables extends javax.swing.JFrame {
         }
         jScrollPane1.setViewportView(jTablo);
 
-        */
-
+        btnOpenPDF.setBackground(new java.awt.Color(54, 88, 128));
         btnOpenPDF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnOpenPDF.setForeground(new java.awt.Color(230, 230, 230));
         btnOpenPDF.setText("Open PDF");
         btnOpenPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +125,7 @@ public class Tables extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTableName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTableName, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(selectTables, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +160,8 @@ public class Tables extends javax.swing.JFrame {
 
         int index = selectTables.getSelectedIndex();
         lblTableName.setForeground(new java.awt.Color(0, 0, 128));
-        lblTableName.setText("Table Name : " + selectTables.getItemAt(index));
+        Item temp = Item.search(selectTables.getItemAt(index));
+        lblTableName.setText("Table Name : " + temp.name + " (" + selectTables.getItemAt(index) + ")");
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < periods.length; j++) {
@@ -203,7 +174,16 @@ public class Tables extends javax.swing.JFrame {
             }
         }
 
-        jTablo.setModel(new javax.swing.table.DefaultTableModel(tablo1, periods));
+        jTablo.setModel(new javax.swing.table.DefaultTableModel(tablo1, periods) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
         jTablo.getColumnModel().getColumn(0).setPreferredWidth(200);
         for (int i = 1; i < periods.length; i++) {
             jTablo.getColumnModel().getColumn(i).setPreferredWidth(75);
@@ -211,20 +191,12 @@ public class Tables extends javax.swing.JFrame {
         for (int i = 0; i < 7; i++) {
             jTablo.setRowHeight(i, 25);
         }
-        if (jTablo.getColumnModel().getColumnCount() > 0) {
-            jTablo.getColumnModel().getColumn(0).setResizable(false);
-            jTablo.getColumnModel().getColumn(2).setResizable(false);
-            jTablo.getColumnModel().getColumn(1).setResizable(false);
-            jTablo.getColumnModel().getColumn(3).setResizable(false);
-            jTablo.getColumnModel().getColumn(4).setResizable(false);
-            jTablo.getColumnModel().getColumn(5).setResizable(false);
-            jTablo.getColumnModel().getColumn(6).setResizable(false);
-            jTablo.getColumnModel().getColumn(7).setResizable(false);
-            jTablo.getColumnModel().getColumn(8).setResizable(false);
-            jTablo.getColumnModel().getColumn(9).setResizable(false);
-            jTablo.getColumnModel().getColumn(10).setResizable(false);
+        for (int i = 0; i < periods.length; i++) {
+            if (jTablo.getColumnModel().getColumnCount() > 0) {
+                jTablo.getColumnModel().getColumn(i).setResizable(false);
+            }
         }
-
+        jTablo.setCellSelectionEnabled(true);
 
     }//GEN-LAST:event_btnShowTableActionPerformed
 
@@ -233,33 +205,26 @@ public class Tables extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnOpenPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenPDFActionPerformed
-        
+
         try {
 
-        File pdfFile = new File("MRP.pdf");
-        if (pdfFile.exists()) {
+            File pdfFile = new File("MRP.pdf");
+            if (pdfFile.exists()) {
 
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(pdfFile);
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Awt Desktop is not supported!", "Warning", JOptionPane.WARNING_MESSAGE);/////////////////////////////////////////             
+                }
+
             } else {
-                JOptionPane.showMessageDialog(null, "Awt Desktop is not supported!", "Warning", JOptionPane.WARNING_MESSAGE);/////////////////////////////////////////             
+                JOptionPane.showMessageDialog(null, "File is not exists!", "Warning", JOptionPane.WARNING_MESSAGE);
             }
 
-        } else {
-            JOptionPane.showMessageDialog(null, "File is not exists!", "Warning", JOptionPane.WARNING_MESSAGE);          
+        } catch (HeadlessException | IOException ex) {
         }
 
-        
 
-      } catch (HeadlessException | IOException ex) {
-        ex.printStackTrace();
-      }
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_btnOpenPDFActionPerformed
 
     public static void product(Item item) {
@@ -288,12 +253,14 @@ public class Tables extends javax.swing.JFrame {
                     Item duplicateParent = whichParent(duplicate.materialFor, SecondFrame.items);
 
                     item.grossReqList = new LinkedList<>();
-                    for (int i = 0; i < Objects.requireNonNull(duplicateParent).grossReqList.size(); i++) 
+                    for (int i = 0; i < Objects.requireNonNull(duplicateParent).grossReqList.size(); i++) {
                         item.grossReqList.add(parent.pReleases.get(i) * item.needed + duplicateParent.pReleases.get(i) * duplicate.needed);
-                    
-                } else 
+                    }
+
+                } else {
                     return;
-                
+                }
+
             } else {
                 item.grossReqList = new LinkedList<>(parent.pReleases);
             }
@@ -327,7 +294,7 @@ public class Tables extends javax.swing.JFrame {
                             plannedOrderReleases = netReq;
                             plannedOrderDelivery = netReq;
                         } else {
-                            double lotSizingRule =Double.parseDouble(item.lotSizingRule);
+                            double lotSizingRule = Double.parseDouble(item.lotSizingRule);
                             int temp = (int) Math.ceil(netReq / lotSizingRule);
                             timePhasedNetReq = netReq;
                             plannedOrderReleases = (int) (lotSizingRule * temp);
@@ -343,8 +310,8 @@ public class Tables extends javax.swing.JFrame {
                             item.bill[6][i] = plannedOrderDelivery;
 
                         } else {
-                            int week=i+1;
-                            JOptionPane.showMessageDialog(null, "Lead Time Exception"+"\n"+week + ". week order isn't possible for"+ item.name+" ("+item.itemID+").","Warning",JOptionPane.WARNING_MESSAGE);
+                            int week = i + 1;
+                            JOptionPane.showMessageDialog(null, "Lead Time Exception" + "\n" + week + ". week order isn't possible for" + item.name + " (" + item.itemID + ").", "Warning", JOptionPane.WARNING_MESSAGE);
                             System.exit(0);
                         }
 
@@ -375,23 +342,10 @@ public class Tables extends javax.swing.JFrame {
             }
             item.isBillFull = true;
         } else {
-            JOptionPane.showMessageDialog(null, "For item "+item.itemID+" on hand amount isn't enough to start this order.\nPlease try again.", "Warning",
+            JOptionPane.showMessageDialog(null, "For item " + item.itemID + " on hand amount isn't enough to start this order.\nPlease try again.", "Warning",
                     JOptionPane.WARNING_MESSAGE);
-              System.exit(0);
+            System.exit(0);
         }
-
-    }
-
-    private static double removeChars(String lotSizingRule) {
-        String[] str = lotSizingRule.split(" ");
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(str));
-        ArrayList<String> temp = new ArrayList<>();
-        temp.add("");
-        temp.add("multiples");
-        temp.add("of");
-        list.removeAll(temp);
-
-        return Integer.parseInt(list.get(0));
 
     }
 
@@ -422,7 +376,7 @@ public class Tables extends javax.swing.JFrame {
     private javax.swing.JButton btnShowTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablo;
-    private javax.swing.JLabel lblTableName;
+    public static javax.swing.JLabel lblTableName;
     private javax.swing.JComboBox<String> selectTables;
     // End of variables declaration//GEN-END:variables
 }

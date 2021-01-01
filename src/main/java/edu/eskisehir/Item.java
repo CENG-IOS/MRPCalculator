@@ -1,4 +1,3 @@
-
 package edu.eskisehir;
 
 import java.util.LinkedList;
@@ -19,7 +18,6 @@ public class Item {
     LinkedList<Integer> pReleases = new LinkedList<>();
     String materialFor;
     boolean isBillFull = false;
-
 
     public Item(String itemID, int amountOnHand, int scheduledReceipt, int arrivalOnWeek,
             int leadTime, String lotSizingRule, int level, int needed, String materialFor, String name) {
@@ -42,21 +40,21 @@ public class Item {
 
     public Item findDuplicate() {
         for (Item item : SecondFrame.items) {
-            if (item!=null&&item.itemID.equals(itemID) && !item.materialFor.equals(materialFor))
+            if (item != null && item.itemID.equals(itemID) && !item.materialFor.equals(materialFor)) {
                 return item;
+            }
 
         }
         return null;
     }
-    
-     public static Item search(String itemID) {
+
+    public static Item search(String itemID) {
         for (int i = 0; i < SecondFrame.items.size(); i++) {
             if (SecondFrame.items.get(i).itemID.equals(itemID)) {
-             return SecondFrame.items.get(i);
+                return SecondFrame.items.get(i);
             }
         }
 
         return null;
     }
 }
-

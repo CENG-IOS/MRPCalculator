@@ -153,7 +153,7 @@
         <Component class="javax.swing.JTable" name="input_table">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="if (input_table.getColumnModel().getColumnCount() &gt; 0) {&#xa;    input_table.getColumnModel().getColumn(0).setResizable(false);&#xa;    input_table.getColumnModel().getColumn(2).setResizable(false);&#xa;    input_table.getColumnModel().getColumn(1).setResizable(false);&#xa;    input_table.getColumnModel().getColumn(3).setResizable(false);&#xa;    input_table.getColumnModel().getColumn(4).setResizable(false);&#xa;    input_table.getColumnModel().getColumn(5).setResizable(false);&#xa;}">
-              <Connection code="new javax.swing.table.DefaultTableModel(inputTable,title)&#xa;{&#xa;    boolean[] canEdit = new boolean [] {&#xa;        false, false, false, false&#xa;    };&#xa;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}&#xa;" type="code"/>
+              <Connection code="new javax.swing.table.DefaultTableModel(inputTable,title)&#xa;    {&#xa;        boolean[] canEdit = new boolean [] {&#xa;            false, false, false, false,false, false&#xa;        };&#xa;&#xa;        public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;            return canEdit [columnIndex];&#xa;        }&#xa;    }&#xa;    " type="code"/>
             </Property>
             <Property name="autoResizeMode" type="int" value="0"/>
             <Property name="cellSelectionEnabled" type="boolean" value="true"/>
@@ -191,8 +191,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCalculateMRP">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="80" green="58" red="36" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e6" green="e6" red="e6" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Calculate MRP tables"/>
       </Properties>
