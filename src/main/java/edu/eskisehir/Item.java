@@ -1,5 +1,5 @@
 
-package edu.esksiehir;
+package edu.eskisehir;
 
 import java.util.LinkedList;
 
