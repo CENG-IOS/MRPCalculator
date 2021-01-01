@@ -37,7 +37,6 @@ public class SecondFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         selector = new javax.swing.JComboBox<>();
-        btnUpdate = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         input_table = new javax.swing.JTable();
         lblSelect_item_id = new javax.swing.JLabel();
@@ -50,6 +49,7 @@ public class SecondFrame extends javax.swing.JFrame {
         lblScheduledReceipt = new javax.swing.JLabel();
         lblArrivalOnWeek = new javax.swing.JLabel();
         btnDefaultValues = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Input Table");
@@ -58,14 +58,6 @@ public class SecondFrame extends javax.swing.JFrame {
 
         selector.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         selector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1605", "13122", "048", "118", "314", "062", "14127", "457", "11495", "129", "1118", "2142", "019" }));
-
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
 
         input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable,title)
             {
@@ -129,6 +121,14 @@ public class SecondFrame extends javax.swing.JFrame {
             }
         });
 
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,8 +137,15 @@ public class SecondFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnDefaultValues)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCalculateMRP))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(160, 160, 160))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblSelect_item_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -150,18 +157,13 @@ public class SecondFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblScheduledReceipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtScheduledReceipt)))
-                            .addComponent(lblConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtScheduledReceipt))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtArrivalOnWeek)
                             .addComponent(lblArrivalOnWeek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(btnUpdate))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDefaultValues)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCalculateMRP)))
+                        .addComponent(btnUpdate)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -193,57 +195,6 @@ public class SecondFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
-        if (check(txtOnHand.getText().trim()) || check(txtArrivalOnWeek.getText().trim()) || check(txtScheduledReceipt.getText().trim())) {
-            lblConsole.setForeground(new java.awt.Color(204, 0, 0));
-            lblConsole.setText("Illegal input!");
-        } else {
-            lblConsole.setText("");
-            inputTable[selector.getSelectedIndex()][1] = txtOnHand.getText().trim();
-            inputTable[selector.getSelectedIndex()][2] = txtScheduledReceipt.getText().trim();
-            inputTable[selector.getSelectedIndex()][3] = txtArrivalOnWeek.getText().trim();
-            lblConsole.setForeground(new java.awt.Color(29, 150, 65));
-            lblConsole.setText("Update is successful!");
-
-            Item item = Item.search(selector.getSelectedItem().toString());
-            item.amountOnHand = Integer.parseInt(txtOnHand.getText().trim());
-            item.scheduledReceipt = Integer.parseInt(txtScheduledReceipt.getText().trim());
-            item.arrivalOnWeek = Integer.parseInt(txtArrivalOnWeek.getText().trim());
-
-            txtArrivalOnWeek.setText("");
-            txtOnHand.setText("");
-            txtScheduledReceipt.setText("");
-        }
-
-        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title) {
-            boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false
-            };
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        }
-        );
-
-        for (int i = 0; i < 6; i++) {
-            if (input_table.getColumnModel().getColumnCount() > 0) {
-                input_table.getColumnModel().getColumn(i).setResizable(false);
-            }
-        }
-        //selector.setSelectedI          
-        input_table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        input_table.getColumnModel().getColumn(1).setPreferredWidth(110);
-        input_table.getColumnModel().getColumn(2).setPreferredWidth(120);
-        input_table.getColumnModel().getColumn(3).setPreferredWidth(100);
-        input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
-        input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
-        input_table.setCellSelectionEnabled(true);
-
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCalculateMRPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateMRPActionPerformed
         setVisible(false);
@@ -359,6 +310,57 @@ public class SecondFrame extends javax.swing.JFrame {
         input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
         input_table.setCellSelectionEnabled(true);
     }//GEN-LAST:event_btnDefaultValuesActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if (check(txtOnHand.getText().trim()) || check(txtArrivalOnWeek.getText().trim()) || check(txtScheduledReceipt.getText().trim())) {
+            lblConsole.setForeground(new java.awt.Color(204, 0, 0));
+            lblConsole.setText("Illegal input!");
+        } else {
+            lblConsole.setText("");
+            inputTable[selector.getSelectedIndex()][1] = txtOnHand.getText().trim();
+            inputTable[selector.getSelectedIndex()][2] = txtScheduledReceipt.getText().trim();
+            inputTable[selector.getSelectedIndex()][3] = txtArrivalOnWeek.getText().trim();
+            lblConsole.setForeground(new java.awt.Color(29, 150, 65));
+            lblConsole.setText("Update is successful!");
+
+            Item item = Item.search(selector.getSelectedItem().toString());
+            item.amountOnHand = Integer.parseInt(txtOnHand.getText().trim());
+            item.scheduledReceipt = Integer.parseInt(txtScheduledReceipt.getText().trim());
+            item.arrivalOnWeek = Integer.parseInt(txtArrivalOnWeek.getText().trim());
+
+            txtArrivalOnWeek.setText("");
+            txtOnHand.setText("");
+            txtScheduledReceipt.setText("");
+            selector.setSelectedIndex(selector.getSelectedIndex() + 1);
+        }
+
+        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        }
+        );
+
+        for (int i = 0; i < 6; i++) {
+            if (input_table.getColumnModel().getColumnCount() > 0) {
+                input_table.getColumnModel().getColumn(i).setResizable(false);
+            }
+        }         
+        input_table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        input_table.getColumnModel().getColumn(1).setPreferredWidth(110);
+        input_table.getColumnModel().getColumn(2).setPreferredWidth(120);
+        input_table.getColumnModel().getColumn(3).setPreferredWidth(100);
+        input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
+        input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
+        input_table.setCellSelectionEnabled(true);
+            
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     public boolean check(String s) {
         try {
