@@ -76,7 +76,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>edu.esksiehir.DemandInput</mainClass>
+                                <mainClass>edu.eskisehir.DemandInput</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
