@@ -228,10 +228,7 @@ public class Tables extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenPDFActionPerformed
 
     public static void product(Item item) {
-        for (Integer demandInt : DemandInput.demandInt) {
-            item.pReleases.add(0);
-        }
-
+        
         Item parent = whichParent(item.materialFor, SecondFrame.items);
 
         int scheduledRec;
