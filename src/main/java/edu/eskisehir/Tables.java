@@ -305,8 +305,7 @@ public class Tables extends javax.swing.JFrame {
                         if (i >= item.leadTime) {
                             item.bill[4][i - item.leadTime] = timePhasedNetReq;
                             item.bill[5][i - item.leadTime] = plannedOrderReleases;
-                            item.pReleases.remove(i - item.leadTime);
-                            item.pReleases.add(i - item.leadTime, plannedOrderReleases);
+                            item.pReleases.set(i - item.leadTime, plannedOrderReleases);
                             item.bill[6][i] = plannedOrderDelivery;
 
                         } else {
