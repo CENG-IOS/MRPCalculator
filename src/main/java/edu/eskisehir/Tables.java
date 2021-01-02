@@ -242,14 +242,12 @@ public class Tables extends javax.swing.JFrame {
         Item duplicate = item.findDuplicate();
 
         if (item.level == 0) {
-            item.grossReqList = new LinkedList<>(DemandInput.demandInt);
+            item.grossReqList = DemandInput.demandInt;
         } else {
 
             if (duplicate != null) {
                 if (!duplicate.isBillFull) {
-                    Item duplicateParent = whichParent(duplicate.materialFor, SecondFrame.items);
-
-                    item.grossReqList = new LinkedList<>();
+                    Item duplicateParent = whichParent(duplicate.materialFor, SecondFrame.items);        
                     for (int i = 0; i < Objects.requireNonNull(duplicateParent).grossReqList.size(); i++) {
                         item.grossReqList.add(parent.pReleases.get(i) * item.needed + duplicateParent.pReleases.get(i) * duplicate.needed);
                     }
@@ -259,7 +257,7 @@ public class Tables extends javax.swing.JFrame {
                 }
 
             } else {
-                item.grossReqList = new LinkedList<>(parent.pReleases);
+                item.grossReqList = parent.pReleases;
             }
         }
 
