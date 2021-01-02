@@ -14,7 +14,7 @@ public class Item {
     int level;
     int[][] bill;
     int needed;
-    LinkedList<Integer> grossReqList;
+    LinkedList<Integer> grossReqList= new LinkedList<>();
     LinkedList<Integer> pReleases = new LinkedList<>();
     String materialFor;
     boolean isBillFull = false;
@@ -31,6 +31,9 @@ public class Item {
         this.needed = needed;
         this.materialFor = materialFor;
         this.name = name;
+        for (int i = 0; i < 10; i++) { 
+          this.pReleases.add(0);
+        }
 
     }
 
