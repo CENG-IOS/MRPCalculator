@@ -311,6 +311,7 @@ public class DemandInput extends javax.swing.JFrame {
                     || txt4.getText().equals("") || txt5.getText().equals("") || txt6.getText().equals("")
                     || txt7.getText().equals("") || txt8.getText().equals("") || txt9.getText().equals("")
                     || txt10.getText().equals(""))) {
+
                 lblConsole.setText("");
 
                 try {
@@ -332,6 +333,7 @@ public class DemandInput extends javax.swing.JFrame {
 
                     flag = false;
                 } catch (NumberFormatException ex) {
+                    demandInt.clear();
                     lblConsole.setForeground(new java.awt.Color(204, 0, 0));
                     lblConsole.setText("Illegal input!");
 

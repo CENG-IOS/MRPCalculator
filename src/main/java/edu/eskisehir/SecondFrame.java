@@ -309,6 +309,9 @@ public class SecondFrame extends javax.swing.JFrame {
         input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
         input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
         input_table.setCellSelectionEnabled(true);
+        txtArrivalOnWeek.setText("");
+        txtOnHand.setText("");
+        txtScheduledReceipt.setText("");
     }//GEN-LAST:event_btnDefaultValuesActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -350,7 +353,7 @@ public class SecondFrame extends javax.swing.JFrame {
             if (input_table.getColumnModel().getColumnCount() > 0) {
                 input_table.getColumnModel().getColumn(i).setResizable(false);
             }
-        }         
+        }
         input_table.getColumnModel().getColumn(0).setPreferredWidth(50);
         input_table.getColumnModel().getColumn(1).setPreferredWidth(110);
         input_table.getColumnModel().getColumn(2).setPreferredWidth(120);
@@ -358,8 +361,8 @@ public class SecondFrame extends javax.swing.JFrame {
         input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
         input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
         input_table.setCellSelectionEnabled(true);
-            
-        
+
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     public boolean check(String s) {
