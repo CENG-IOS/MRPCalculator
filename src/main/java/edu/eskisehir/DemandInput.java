@@ -313,6 +313,7 @@ public class DemandInput extends javax.swing.JFrame {
                     || txt10.getText().equals(""))) {
 
                 lblConsole.setText("");
+                
 
                 try {
 
@@ -327,6 +328,12 @@ public class DemandInput extends javax.swing.JFrame {
                     demandInt.add(Integer.parseInt(txt9.getText()));
                     demandInt.add(Integer.parseInt(txt10.getText()));
                     clearInputs();
+                    
+                    
+                    for (int i = 0; i < 10; i++) {
+                        if(demandInt.get(i)<0)
+                            throw new NumberFormatException();
+                    }
 
                     lblConsole.setForeground(new java.awt.Color(29, 150, 65));
                     lblConsole.setText("Successful, press next!");
@@ -339,7 +346,7 @@ public class DemandInput extends javax.swing.JFrame {
 
                     clearInputs();
                     flag = true;
-
+                    
                 }
 
             } else {

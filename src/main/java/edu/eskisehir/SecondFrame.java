@@ -335,39 +335,40 @@ public class SecondFrame extends javax.swing.JFrame {
             txtOnHand.setText("");
             txtScheduledReceipt.setText("");
             selector.setSelectedIndex(selector.getSelectedIndex() + 1);
-        }
+            input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false
+                };
 
-        input_table.setModel(new javax.swing.table.DefaultTableModel(inputTable, title) {
-            boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false
-            };
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
             }
-        }
-        );
+            );
 
-        for (int i = 0; i < 6; i++) {
-            if (input_table.getColumnModel().getColumnCount() > 0) {
-                input_table.getColumnModel().getColumn(i).setResizable(false);
+            for (int i = 0; i < 6; i++) {
+                if (input_table.getColumnModel().getColumnCount() > 0) {
+                    input_table.getColumnModel().getColumn(i).setResizable(false);
+                }
             }
+            input_table.getColumnModel().getColumn(0).setPreferredWidth(50);
+            input_table.getColumnModel().getColumn(1).setPreferredWidth(110);
+            input_table.getColumnModel().getColumn(2).setPreferredWidth(120);
+            input_table.getColumnModel().getColumn(3).setPreferredWidth(100);
+            input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
+            input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
+            input_table.setCellSelectionEnabled(true);
         }
-        input_table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        input_table.getColumnModel().getColumn(1).setPreferredWidth(110);
-        input_table.getColumnModel().getColumn(2).setPreferredWidth(120);
-        input_table.getColumnModel().getColumn(3).setPreferredWidth(100);
-        input_table.getColumnModel().getColumn(4).setPreferredWidth(75);
-        input_table.getColumnModel().getColumn(5).setPreferredWidth(100);
-        input_table.setCellSelectionEnabled(true);
 
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     public boolean check(String s) {
         try {
-            Integer.parseInt(s);
+            int a = Integer.parseInt(s);
+            if(a<0)
+                throw new NumberFormatException();
 
         } catch (NumberFormatException ex) {
             return true;
