@@ -1,13 +1,13 @@
 item ID Lead Time Lot Sizing Rule Level Needed Material For Name
 1605 1 L4L 0 0 - Shovel
 13122 1 40 1 1 1605 Top Handle
-048 3 30 1 1 1605 Scoop-Shift
+048 3 30 1 1 1605 Scoop-Shaft
 118 2 L4L 1 1 1605 Shaft
-314 1 50 1 1 1605 Scoop Assambly
+314 1 50 1 1 1605 Scoop Assembly
 062 2 L4L 2 4 1605 Nail
 062 2 L4L 2 2 13122 Nail
-14127 1 100 2 6 314 Rivert
-14127 1 100 2 4 1605 Rivert
+14127 1 100 2 6 314 Rivet
+14127 1 100 2 4 1605 Rivet
 457 2 L4L 2 1 13122 Top Handle
 11495 1 50 2 1 13122 Bracelet
 129 4 40 3 1 11495 Top Handle
